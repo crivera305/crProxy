@@ -1,0 +1,123 @@
+{% extends 'proxy/base.proxy.html.twig' %}
+
+{% block body %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('visualization', '1.0', {'packages':['corechart','gauge']});
+        google.charts.setOnLoadCallback(drawChart1);
+
+        function drawChart1() {
+            var data = google.visualization.arrayToDataTable([
+                ['Date Checked', 'Speed'],
+                {% for proxy in proxies %}
+                ['{{ proxy.dateChecked|date('Y-m-d H:i:s') }}', {{ proxy.latency }}],
+                {% endfor %}
+
+            ]);
+
+            var options = {
+                title: 'Proxy Historical Performance Status',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+            chart.draw(data, options);
+            $( window ).resize(function() {
+                chart.draw(data, options);
+            });
+
+        }
+
+        google.charts.setOnLoadCallback(drawChart2);
+        function drawChart2() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Speed', {{ proxies[0].latency != 0 ? (proxies[0].latency*10) : '100' }}]
+            ]);
+
+            var options = {
+                width: 400, height: 120,
+                redFrom: 75, redTo: 100,
+                yellowFrom:50, yellowTo: 74,
+                minorTicks: 5
+            };
+
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+            $( window ).resize(function() {
+                chart.draw(data, options);
+            });
+
+        }
+    </script>
+    <div class="jumbotron">
+        <div class="container">
+            <h1><div><small>Proxy History</small></div></h1>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#menu1">Current Status</a></li>
+                        <li><a data-toggle="tab" href="#menu2">History</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="menu1" class="tab-pane fade in active">
+                            <div class="col-xs-12">
+                                <div id="chart_div" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                            <ul class="nav nav-pills nav-stacked col-md-3">
+                                <li class="active"><a data-toggle="tab" href="#graph">Graph</a></li>
+                                <li><a data-toggle="tab" href="#data">Data</a></li>
+                            </ul>
+                            <div class="tab-content col-md-9">
+                                <div id="graph" class="tab-pane fade in active">
+
+                                    <div class="col-xs-12">
+                                        <div id="curve_chart" style="width: 100%;"></div>
+                                    </div>
+                                </div>
+                                <div id="data" class="tab-pane fade in active">
+                                    <div class="col-xs-12">
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>IP</th>
+                                                <th>SPEED</th>
+                                                <th>ONLINE?</th>
+                                                <th>DATE CHECKED</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for proxy in proxies %}
+                                                <tr>
+                                                    <td>{{ proxy.ip }}</td>
+                                                    <td>{{ proxy.latency }}</td>
+                                                    <td>{{ proxy.isOnline }}</td>
+                                                    <td>{{ proxy.dateChecked|date('Y-m-d H:i:s') }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div id="curve_chart" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

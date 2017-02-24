@@ -1,0 +1,27 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>IP</th>
+        <th>PORT</th>
+        <th>SPEED</th>
+        <th>FLAG</th>
+        <th>COUNTRY</th>
+        <th>LAST CHECKED</th>
+        <th>ACTION</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for proxy in proxies %}
+        {% set image = 'bundles/proxy/images/flags/'~proxy.countryCode|lower~'.png' %}
+        <tr>
+            <td>{{ proxy.ip }}</td>
+            <td>{{ proxy.port }}</td>
+            <td>{{ proxy.latency }}</td>
+            <td><a href="{{ path('proxy-by-country', { 'country': proxy.countryCode|default('test') }) }}" title="{{ proxy.countryCode }}"><img src="{{ asset(image) }}" alt="{{ proxy.countryCode }}" width="20"/></a></td>
+            <td>{{ proxy.countryCode }}</td>
+            <td>{{ proxy.dateChecked|date('Y-m-d H:i:s') }}</td>
+            <td><a href="{{  path('proxy-history', { 'ip': proxy.ip }) }}"><button class="btn btn-xs btn-primary">See History</button></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

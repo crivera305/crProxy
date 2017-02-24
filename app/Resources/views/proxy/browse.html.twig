@@ -1,0 +1,46 @@
+{% extends 'proxy/base.proxy.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Proxy Browser
+                <div>
+                    <small>Free Anonymous Browsing</small>
+                </div>
+            </h1>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="container">
+            <div class="col-sm-12">
+                <form method="post" action="{{ path('proxy-browse-now') }}">
+                    <fieldset>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></div>
+                                <input class="form-control" id="url" name="url" type="text"
+                                       placeholder="Enter web address">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <p class="proxy_option">
+                                    <em>Choose Proxy:</em>
+                                    <span>
+                                        <select name="proxy">
+                                            <option value="152.26.60.30:3128">US</option>
+                                            <option value="54.153.36.14:8083">CA</option>
+                                        </select>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-sm btn-primary" type="submit">Visit Anonymously</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

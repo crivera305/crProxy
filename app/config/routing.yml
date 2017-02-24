@@ -1,0 +1,7 @@
+xpage:
+    resource: "@XpageBundle/Controller/"
+    type:     annotation
+
+proxy:
+    resource: "@ProxyBundle/Controller/"
+    type:     annotation

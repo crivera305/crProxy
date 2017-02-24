@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Porn Categories</h1>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                    {% for category in categories %}
+                        <div class="col-md-4"><a href="{{ category }}">{{ category|e }}</a></div>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

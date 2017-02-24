@@ -1,0 +1,36 @@
+{% extends 'proxy/base.proxy.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Proxy Countries</h1>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <td># of Proxies</td>
+                            <td>Flag</td>
+                            <td>Country</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for country in countries %}
+                            {% set image = 'bundles/proxy/images/flags/'~country.countryCode~'.png' %}
+                            <tr>
+                                <td>{{ country.countryCount }}</td>
+                                <td><a href="{{ path('proxy-by-country', { 'country': country.countryCode|default('test') }) }}" title="{{ country.countryCode }}"><img src="{{ asset(image) }}" alt="{{ country.countryCode }}" width="20"/></a></td>
+                                <td>{{ country.countryCode }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

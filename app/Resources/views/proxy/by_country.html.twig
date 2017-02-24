@@ -1,0 +1,56 @@
+{% extends 'proxy/base.proxy.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>{{  country|upper }} Proxies
+            </h1>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <h2>{{ onlineProxies|length }}
+                        <div>
+                            <small>Online {{ country|upper }} Proxies</small>
+                        </div>
+                    </h2>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <h2>{{ offlineProxies|length }}
+                        <div>
+                            <small>OffLine {{ country|upper }} Proxies</small>
+                        </div>
+                    </h2>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <h2>{{ (onlineProxies|length+offlineProxies|length) }}
+                        <div>
+                            <small>Total {{ country|upper }} Proxies</small>
+                        </div>
+                    </h2>
+                </div>
+            </div>
+            <hr>
+            <div class="col-sm-12">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#menu1">Online Proxies</a></li>
+                    <li><a data-toggle="tab" href="#menu2">Offline Proxies</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="menu1" class="tab-pane fade in active">
+                        <h3>Online </h3>
+                        {% include 'proxy/partials/proxy_table.html.twig' with { 'proxies': onlineProxies} %}
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <h3>Offline</h3>
+                        {% include 'proxy/partials/proxy_table.html.twig' with { 'proxies': offlineProxies} %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
