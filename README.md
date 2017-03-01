@@ -9,10 +9,14 @@ build in the ability to test anonymity
 http://azenv.net/
 
 
-
-Commands to use proxy
+Script to scrape proxies from multiple sources and save to database
 
 app/console scrape:proxies
+
+
+Script to check database for proxies to validate and update status
+
 app/console proxy:check
+
 
 

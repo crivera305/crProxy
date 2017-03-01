@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/82Tube.iml" filepath="$PROJECT_DIR$/82Tube.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crProxy.iml" filepath="$PROJECT_DIR$/crProxy.iml" />
     </modules>
   </component>
 </project>

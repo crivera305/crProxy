@@ -9,7 +9,7 @@ use XpageBundle\Utils\UtilityClass;
 class ProxyController extends Controller
 {
     /**
-     * @Route("/proxy/dashboard", name="proxy-dashboard")
+     * @Route("/", name="proxy-dashboard")
      */
     public function dashboardAction()
     {

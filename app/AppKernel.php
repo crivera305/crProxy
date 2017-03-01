@@ -19,7 +19,7 @@ class AppKernel extends Kernel
 
             new Debril\RssAtomBundle\DebrilRssAtomBundle(),
 
-            new XpageBundle\XpageBundle(),
+            //new XpageBundle\XpageBundle(),
             new ProxyBundle\ProxyBundle(),
         );
 

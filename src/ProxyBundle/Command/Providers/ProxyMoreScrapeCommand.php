@@ -14,7 +14,7 @@ use ProxyBundle\Entity\Proxies;
 class ProxyMoreScrapeCommand extends ContainerAwareCommand
 {
     private $output;
-    private $totalPages;
+    private $totalPages = 0;
 
     protected function configure()
     {
@@ -32,9 +32,7 @@ class ProxyMoreScrapeCommand extends ContainerAwareCommand
         $crawler = new Crawler($response);
 
         $pagination = $crawler->filter('#x-page a');
-        $paginationArray = explode("-",$this->get_inner_html($pagination->getNode(10)->parentNode));
-        $paginationArray = explode(".",$paginationArray[2]);
-        $this->totalPages = $paginationArray[0];
+        $this->totalPages = count($pagination)-2;
 
         for ($x = 1; $x <= $this->totalPages; $x++) {
             $this->scrapePage($x);
