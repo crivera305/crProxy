@@ -3,10 +3,10 @@ crProxy was built to be a fully automated proxy finder/validator service.
 
 There are 2 scripts provided to make this happen - 
 
-scrape script :: app/console scrape:proxies
+app/console scrape:proxies
 The scrape script will scrape 6 online free proxy providers to save lists of ips to database for status check
 
-status check script :: app/console proxy:check
+app/console proxy:check
 The status check script will check non checked proxies to determine which are online / available and working as expected
 
 
