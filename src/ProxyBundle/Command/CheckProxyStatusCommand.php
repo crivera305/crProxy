@@ -1,6 +1,7 @@
 <?php
 namespace ProxyBundle\Command;
 
+use ProxyBundle\Utils\ProxyClass;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -9,7 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use ProxyBundle\Entity\Proxies;
 use ProxyBundle\Entity\ProxyHistory;
-use XpageBundle\Utils\UtilityClass;
 
 
 class CheckProxyStatusCommand extends ContainerAwareCommand
@@ -48,7 +48,7 @@ class CheckProxyStatusCommand extends ContainerAwareCommand
     {
         $url = 'http://dynupdate.no-ip.com/ip.php';
 
-        return UtilityClass::curl($url);
+        return ProxyClass::curl($url);
     }
 
     private function setPublicIP($ip)
